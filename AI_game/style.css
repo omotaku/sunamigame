@@ -126,7 +126,7 @@ body {
 .damage-zone { position: absolute; background: repeating-linear-gradient(45deg, #4b0082, #4b0082 5px, #8a2be2 5px, #8a2be2 10px); opacity: 0.6; z-index: 1; }
 
 @keyframes float-anim { 50% { transform: translateY(-8px); } }
-@keyframes ofuda-float { 0% { transform: translateY(0); } 50% { transform: translateY(-3px); } 100% { translateY(0); } }
+@keyframes ofuda-float { 0% { transform: translateY(0); } 50% { transform: translateY(-3px); } 100% { } }
 @keyframes flicker-fire { 50% { background: #ffff00; border-color: #fff; box-shadow: 0 0 0 2px #ff8c00; } }
 
 /* --- Stage Select Screen --- */
@@ -309,4 +309,144 @@ body {
     background-repeat: no-repeat;
     animation: float-anim 1.5s ease-in-out infinite;
     z-index: 5;
+}
+
+/* style.css の末尾に追加 */
+
+.roving-boss-enemy {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 45 30' shape-rendering='crispEdges'%3E%3C!-- Main Body --%3E%3Cpath fill='%236a0dad' d='M5 5h35v20H5z'/%3E%3Cpath fill='%23800080' d='M10 8h25v14H10z'/%3E%3C!-- Wings --%3E%3Cpath fill='%239400d3' d='M0 10h5v10H0z M40 10h5v10h-5z'/%3E%3C!-- Thrusters --%3E%3Cpath fill='%234b0082' d='M5 25h10v5H5z M30 25h10v5H30z'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: transform 0.2s ease-out;
+}
+
+.roving-boss-enemy .boss-core {
+    top: 50%;
+    left: 50%;
+    width: 30px;
+    height: 30px;
+    margin-top: -19px; /* (30+4*2)/2 */
+    margin-left: -19px;
+    background-color: #00ffff;
+    border-color: #00ced1;
+    box-shadow: 0 0 10px #00ffff;
+}
+
+.roving-boss-enemy.phase2 .boss-core {
+    background-color: #ff1493;
+    border-color: #c71585;
+    box-shadow: 0 0 15px #ff1493;
+}
+
+.roving-boss-enemy.hit {
+    animation: boss-hit-shake 0.1s linear 2;
+}
+
+@keyframes boss-hit-shake {
+    50% { transform: translateX(5px); }
+    100% { transform: translateX(-5px); }
+}
+
+/* --- Stage 6: Lab Styles --- */
+.stage6-bg #parallax-bg-far {
+    background: #1a1a2a; /* Dark blue/purple base for lab */
+}
+.stage6-bg #parallax-bg-near {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600' shape-rendering='crispEdges'%3E%3Cg fill='rgba(40,40,60,0.5)'%3E%3Crect x='100' y='0' width='2' height='600'/%3E%3Crect x='300' y='0' width='1' height='600'/%3E%3Crect x='550' y='0' width='3' height='600'/%3E%3Crect x='700' y='0' width='1' height='600'/%3E%3C/g%3E%3C/svg%3E");
+    background-position: 0 0;
+}
+.stage6-bg .obstacle {
+    background-color: #4a4a6a; /* Metallic gray/blue for platforms */
+    border: 2px solid #7a7a9a;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' shape-rendering='crispEdges'%3E%3Crect width='16' height='16' fill='%234a4a6a'/%3E%3Cline x1='0' y1='0' x2='16' y2='16' stroke='%235a5a7a'/%3E%3Cline x1='16' y1='0' x2='0' y2='16' stroke='%235a5a7a'/%3E%3C/svg%3E");
+}
+
+.security-bot-enemy {
+    width: 64px;
+    height: 48px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 12' shape-rendering='crispEdges'%3E%3Cpath fill='%236c757d' d='M1 3h14v7H1z'/%3E%3Cpath fill='%23adb5bd' d='M2 4h12v5H2z'/%3E%3Cpath fill='%23343a40' d='M0 10h2v2H0z M14 10h2v2H0z'/%3E%3Cpath fill='%23e63946' d='M7 1h2v2H7z'/%3E%3C/svg%3E");
+    background-size: cover;
+}
+
+.laser-bullet {
+    position: absolute;
+    height: 4px;
+    width: 24px;
+    background: #e63946;
+    box-shadow: 0 0 8px #e63946;
+}
+
+.sentry-drone-enemy {
+    width: 48px;
+    height: 48px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' shape-rendering='crispEdges'%3E%3Cpath fill='%23495057' d='M2 0h8v2H2z M0 2h12v8H0z M2 10h8v2H2z'/%3E%3Cpath fill='%23adb5bd' d='M3 3h6v6H3z'/%3E%3C/svg%3E");
+    background-size: cover;
+    animation: float-anim 2.5s ease-in-out infinite;
+}
+.sentry-laser-beam {
+    position: absolute;
+    background: linear-gradient(to right, rgba(29, 128, 182, 0), rgba(29, 128, 182, 0.8), rgba(29, 128, 182, 0));
+    height: 100%;
+    transform-origin: left center;
+    box-shadow: 0 0 10px #1d80b6;
+    z-index: 1;
+}
+
+.tesla-coil-enemy {
+    width: 80px;
+    height: 40px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 10' shape-rendering='crispEdges'%3E%3Cpath fill='%234a4a6a' d='M0 0h20v4H0z'/%3E%3Cpath fill='%238a8ac8' d='M8 4h4v6H8z'/%3E%3C/svg%3E");
+    background-size: cover;
+}
+
+.tesla-bolt {
+    position: absolute;
+    width: 12px;
+    left: 34px; /* (80-12)/2 */
+    background: linear-gradient(#8ef, #fff, #8ef);
+    box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #8ef;
+    opacity: 0.8;
+    z-index: -1;
+    animation: tesla-flicker 0.1s infinite;
+}
+@keyframes tesla-flicker {
+    50% { opacity: 0.6; }
+}
+
+/* Final Boss Styles */
+.final-boss-enemy {
+    width: 240px;
+    height: 200px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 50' shape-rendering='crispEdges'%3E%3Cpath fill='%23212529' d='M5 5h50v40H5z'/%3E%3Cpath fill='%23495057' d='M10 8h40v34H10z'/%3E%3Cpath fill='%23000' d='M28 2h4v46h-4z'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.boss-core-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.final-boss-core {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    background-color: #e63946;
+    border: 3px solid #f1faee;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #e63946;
+    animation: boss-core-pulse 1s infinite;
+    transition: background-color 0.5s;
+}
+.final-boss-core.invincible {
+    background-color: #6c757d; /* Invincible core color */
+    animation: none;
+}
+.homing-missile {
+    width: 16px;
+    height: 24px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 12' shape-rendering='crispEdges'%3E%3Cpath fill='%23fca311' d='M3 0h2v2H3z'/%3E%3Cpath fill='%23e5e5e5' d='M2 2h4v8H2z'/%3E%3Cpath fill='%23adb5bd' d='M1 10h6v2H1z'/%3E%3C/svg%3E");
+    background-size: cover;
+    transition: transform 0.2s;
 }
